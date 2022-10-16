@@ -1,4 +1,4 @@
-import { CustomError, IErrorResponse } from './shared/globals/helpers/error-handlers';
+import { CustomError, IErrorResponse } from '@global/helpers/error-handlers';
 import HTTP_STATUS from 'http-status-codes';
 import { Application, json, urlencoded, Response, Request, NextFunction } from 'express';
 import http from 'http';
@@ -12,8 +12,9 @@ import compression from 'compression';
 import cookierSession from 'cookie-session';
 import 'express-async-errors';
 import Logger from 'bunyan';
-import { config } from './config';
-import applicationRoutes from './routes';
+// import { config } from './config';
+import applicationRoutes from '@root/routes';
+import { config } from '@root/config';
 
 const SERVER_PORT = 5000;
 const log: Logger = config.createLogger('server');
@@ -92,7 +93,7 @@ export class ChattyServer {
     });
 
     const pubClient = createClient({ url: config.REDIS_HOST });
-
+    console.log('taktakokoooooo', pubClient);
     const subClient = pubClient.duplicate();
 
     await Promise.all([pubClient.connect(), subClient.connect()]);
@@ -106,5 +107,7 @@ export class ChattyServer {
       log.info(`Server running port ${SERVER_PORT}`);
     });
   }
-  private socketIOConnection(io: Server): void {}
+  private socketIOConnection(io: Server): void {
+    log.info('socketIOConnections');
+  }
 }
