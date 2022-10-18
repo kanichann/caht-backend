@@ -14,6 +14,10 @@ class Config {
   public CLOURD_API_KEY: string | undefined;
   public CLOURD_NAME: string | undefined;
   public CLOURD_API_SECRET: string | undefined;
+  public SENDER_EMAIL: string | undefined;
+  public SENDER_EMAIL_PASSWORD: string | undefined;
+  public SENDGRID_API_KEY: string | undefined;
+  public SENDGRID_SENDER: string | undefined;
   private readonly DEFULRT_DATABASE_URL = 'mongodb+srv://ganis9531:95319531@chatty.u5jf11n.mongodb.net/test';
 
   constructor() {
@@ -27,6 +31,10 @@ class Config {
     this.CLOURD_API_KEY = process.env.CLOURD_API_KEY || '';
     this.CLOURD_NAME = process.env.CLOURD_NAME || '';
     this.CLOURD_API_SECRET = process.env.CLOURD_API_SECRET || '';
+    this.SENDER_EMAIL = process.env.SENDER_EMAIL || '';
+    this.SENDER_EMAIL_PASSWORD = process.env.SENDER_EMAIL_PASSWORD || '';
+    this.SENDGRID_API_KEY = process.env.SENDGRID_API_KEY || '';
+    this.SENDGRID_SENDER = process.env.SENDGRID_SENDER || '';
   }
   public createLogger(name: string): bunyan {
     return bunyan.createLogger({ name, level: 'debug' });
