@@ -15,6 +15,7 @@ import Logger from 'bunyan';
 // import { config } from './config';
 import applicationRoutes from '@root/routes';
 import { config } from '@root/config';
+import { SocketIOPostHandler } from '@socket/posts';
 
 const SERVER_PORT = 5000;
 const log: Logger = config.createLogger('server');
@@ -93,7 +94,6 @@ export class ChattyServer {
     });
 
     const pubClient = createClient({ url: config.REDIS_HOST });
-    console.log('taktakokoooooo', pubClient);
     const subClient = pubClient.duplicate();
 
     await Promise.all([pubClient.connect(), subClient.connect()]);
@@ -108,6 +108,7 @@ export class ChattyServer {
     });
   }
   private socketIOConnection(io: Server): void {
-    log.info('socketIOConnections');
+    const postSocketHandler: SocketIOPostHandler= new SocketIOPostHandler(io);
+    postSocketHandler.listen();
   }
 }

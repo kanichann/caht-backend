@@ -36,7 +36,7 @@ export class SignIn {
     const userJwt: string = JWT.sign(
       {
         userId: user._id,
-        uid: existingUser.uId,
+        uId: existingUser.uId,
         email: existingUser.email,
         username: existingUser.username,
         avatarColor: existingUser.avatarColor
