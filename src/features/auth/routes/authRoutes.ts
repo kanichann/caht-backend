@@ -4,6 +4,7 @@ import express, { Router } from 'express';
 import { config } from '@root/config';
 import Logger from 'bunyan';
 import { SignOut } from '@auth/controllers/signout';
+import { Password } from '@auth/controllers/password';
 
 const log: Logger = config.createLogger('auth');
 
@@ -17,6 +18,8 @@ class AuthRoutes {
     console.log('route');
     this.router.post('/signup', SignUp.prototype.create);
     this.router.post('/signin', SignIn.prototype.read);
+    this.router.post('/forgot-password', Password.prototype.create);
+    this.router.post('/reset-password/:token', Password.prototype.update);
 
     return this.router;
   }
